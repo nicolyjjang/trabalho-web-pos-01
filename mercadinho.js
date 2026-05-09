@@ -4,6 +4,8 @@ const port = 8000;
 
 app.use(express.json());
 
+const produtosRoutes = require("./routes/routes_produtos");
+app.use("/produtos", produtosRoutes);
 const rotasVenda = require('./routes/routes_venda');
 app.use('/vendas', rotasVenda);
 const rotaPessoa = require("./routes/routes_pessoa");
@@ -20,5 +22,5 @@ app.use("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Mercadinho Sâo Miguel escutando em http://localhost:${port}`);
+  console.log(`Mercadinho São Miguel escutando em http://localhost:${port}`);
 });
