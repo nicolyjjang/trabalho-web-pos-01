@@ -12,7 +12,7 @@ const router = Router();
 router.get("/", obterVendas);
 router.get("/:id", obterVendaPorId);
 router.post("/", criarNovaVenda);
-router.put("/:id", atualizarVendaPorId);
+router.patch("/:id", atualizarVendaPorId);
 router.delete("/:id", deletarVendaPorId);
 
 module.exports = router;
