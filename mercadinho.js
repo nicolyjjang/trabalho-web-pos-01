@@ -6,12 +6,14 @@ app.use(express.json());
 
 const produtosRoutes = require("./routes/routes_produtos");
 app.use("/produtos", produtosRoutes);
+
 const rotasVenda = require('./routes/routes_venda');
 app.use('/vendas', rotasVenda);
-const rotaPessoa = require("./routes/routes_pessoa");
-const rotaCampanha = require("./routes/campanha");
 
+const rotaPessoa = require("./routes/routes_pessoa");
 app.use("/pessoa", rotaPessoa);
+
+const rotaCampanha = require("./routes/campanha");
 app.use("/campanha", rotaCampanha);
 
 const rotasEntrada = require('./routes/routes_entrada');
