@@ -6,6 +6,11 @@ app.use(express.json());
 
 const rotasVenda = require('./routes/routes_venda');
 app.use('/vendas', rotasVenda);
+const rotaPessoa = require("./routes/routes_pessoa");
+const rotaCampanha = require("./routes/campanha");
+
+app.use("/pessoa", rotaPessoa);
+app.use("/campanha", rotaCampanha);
 
 const rotasEntrada = require('./routes/routes_entrada');
 app.use('/entradas', rotasEntrada);
