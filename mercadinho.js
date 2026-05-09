@@ -4,6 +4,8 @@ const port = 8000;
 
 app.use(express.json());
 
+const rotasVenda = require('./routes/routes_venda');
+app.use('/vendas', rotasVenda);
 const rotaPessoa = require("./routes/routes_pessoa");
 const rotaCampanha = require("./routes/campanha");
 
