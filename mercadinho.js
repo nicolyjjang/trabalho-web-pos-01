@@ -14,6 +14,9 @@ const rotaCampanha = require("./routes/campanha");
 app.use("/pessoa", rotaPessoa);
 app.use("/campanha", rotaCampanha);
 
+const rotasEntrada = require('./routes/routes_entrada');
+app.use('/entradas', rotasEntrada);
+
 app.use("/", (req, res) => {
   res.send("Bem-vindo ao Mercadinho São Miguel!");
 });
