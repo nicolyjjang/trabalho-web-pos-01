@@ -1,3 +1,4 @@
+import { json } from "express";
 import {
   getTodasCampanhas,
   getCampanhaPorId,
@@ -5,85 +6,76 @@ import {
   modificaCampanha,
   deletarCampanhaPorId,
 } from "../services/campanha.js";
+import mongoose from "mongoose";
 
-function getCampanhas(req, res) {
+async function getCampanhas(req, res) {
   try {
-    const campanhas = getTodasCampanhas();
+    const campanhas = await getTodasCampanhas();
     res.send(campanhas);
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+    res.status(500).json({error: error.message});
   }
 }
 
-function getCampanha(req, res) {
+async function getCampanha(req, res) {
   //get:id
   try {
     const id = req.params.id;
 
     if (id && Number(id)) {
-      const campanhas = getCampanhaPorId(id);
+      const campanhas = await getCampanhaPorId(id);
       res.send(campanhas);
     } else {
-      res.status(422);
-      res.send("id invalido");
+      res.status(422).json("id invalido");
     }
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+    res.status(500).json(error.message);
   }
 }
 
-function postCampanha(req, res) {
+async function postCampanha(req, res) {
   try {
     const campanhaNovo = req.body;
 
     if (req.body.nome) {
-      insereCampanha(campanhaNovo);
-      res.status(201);
-      res.send("campanha inserido com sucesso");
+      const campanha = await insereCampanha(campanhaNovo);
+      res.status(201).json(campanha);
     } else {
-      res.status(422);
-      res.send("campo nome obrigadorio");
+      res.status(422).json("campo nome obrigadorio");
     }
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+    res.status(500).json(error.message);
   }
 }
 
-function patchCampanha(req, res) {
+async function patchCampanha(req, res) {
   try {
     const id = req.params.id;
 
-    if (id && Number(id)) {
+    if (id && mongoose.Types.ObjectId.isCalid(id)) {
       const body = req.body;
-      modificaCampanha(body, id);
-      res.send("item stualizado com sucesso");
+      const campanha = await modificaCampanha(body, id);
+      res.json(json);
     } else {
-      res.status(422);
-      res.send("id invalido");
+      res.status(422).json("id invalido");
     }
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+    res.status(500).json(error.message);
   }
 }
 
-function deleteCampanha(req, res) {
+async function deleteCampanha(req, res) {
   try {
     const id = req.params.id;
 
-    if (id && Number(id)) {
-      deletarCampanhaPorId(id);
-      res.send("Campanha deletado com sucesso");
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
+      const campanha = await deletarCampanhaPorId(id);
+      res.json({message: "Campanha deletado com sucesso", campanha});
     } else {
-      res.status(422);
-      res.send("id invalido");
+      res.status(422).json("id invalido");
     }
   } catch (error) {
-    res.status(500);
-    res.send(error.message);
+    res.status(500).json(error.message);
   }
 }
 
