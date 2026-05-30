@@ -1,47 +1,48 @@
-const fs = require('fs');
-const caminhoArquivo = './assets/produtos.json';
+import { Produto } from "../Models/Produto.js";
 
 async function getAllProducts() {
-    return JSON.parse(await fs.promises.readFile(caminhoArquivo, 'utf-8'));
+  const products = await Produto.find();
+  return products;
 }
 
-async function getProduct(id){
-    const products = await getAllProducts();
-    const product = products.find(product => product.id === (Number(id)));
-    return product;
+async function getProduct(id) {
+  const product = await Produto.findById(id);
+  if (!product) {
+    throw new Error("Produto não encontrado");
+  }
+  
+  return product;
 }
 
-async function createProduct(dados){
-    const products = await getAllProducts();
-    const newProduct = [...products, dados];
-    fs.writeFileSync(caminhoArquivo, JSON.stringify(newProduct));
-    return newProduct;
+async function createProduct(dados) {
+  const newProduct = new Produto(dados);
+  const savedProduct = await newProduct.save();
+  return savedProduct;
 }
 
-async function updateProduct(id, modificacoes){
-    const products = await getAllProducts();
-    const productIndex = products.findIndex(product => product.id === (Number(id)));
-    const updatedProduct = {...products[productIndex], ...modificacoes};
-    products[productIndex] = updatedProduct;
-    fs.writeFileSync(caminhoArquivo, JSON.stringify(products));
-    return updatedProduct;
+async function updateProduct(id, modificacoes) {
+  const updatedProduct = await Produto.findByIdAndUpdate(id, modificacoes, {
+    new: true,
+    runValidators: true,
+  });
+  if (!updatedProduct) {
+    throw new Error("Produto não encontrado");
+  }
+  return updatedProduct;
 }
 
-async function deleteProduct(id){
-    const products = await getAllProducts();
-    const deletedProduct = products.findIndex(product => product.id === (Number(id)));
-    if (deletedProduct === -1) {
-        throw new Error('Produto não encontrado');
-    }
-    products.splice(deletedProduct, 1);
-    fs.writeFileSync(caminhoArquivo, JSON.stringify(products,null,2));
-    return products;
+async function deleteProduct(id) {
+  const deletedProduct = await Produto.findByIdAndDelete(id);
+  if (!deletedProduct) {
+    throw new Error("Produto não encontrado");
+  }
+  return deletedProduct;
 }
 
-module.exports = {
-    getAllProducts,
-    getProduct, 
-    createProduct,
-    updateProduct,
-    deleteProduct
+export {
+  getAllProducts,
+  getProduct,
+  createProduct,
+  updateProduct,
+  deleteProduct,
 };

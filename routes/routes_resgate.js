@@ -1,17 +1,18 @@
-const { Router } = require('express');
+import { Router } from "express";
+import {
+  getAllResgatesController,
+  getResgateController,
+  createResgateController,
+  updateResgateController,
+  deleteResgateController,
+} from "../controllers/controllers_resgate.js";
+
 const router = Router();
-const {
-    getAllResgatesController,
-    getResgateController,
-    createResgateController,
-    updateResgateController,
-    deleteResgateController
-} = require('../controllers/controllers_resgates');
 
-router.get('/', getAllResgatesController);
-router.get('/:id', getResgateController);
-router.post('/', createResgateController);
-router.patch('/:id', updateResgateController);
-router.delete('/:id', deleteResgateController);
+router.get("/", getAllResgatesController);
+router.get("/:id", getResgateController);
+router.post("/", createResgateController);
+router.patch("/:id", updateResgateController);
+router.delete("/:id", deleteResgateController);
 
-module.exports = router;
+export { router as default };

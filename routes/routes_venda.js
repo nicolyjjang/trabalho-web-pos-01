@@ -1,11 +1,11 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
   obterVendas,
   obterVendaPorId,
   criarNovaVenda,
   atualizarVendaPorId,
   deletarVendaPorId,
-} = require("../controllers/controller_venda");
+} from "../controllers/controller_venda.js";
 
 const router = Router();
 
@@ -15,4 +15,4 @@ router.post("/", criarNovaVenda);
 router.patch("/:id", atualizarVendaPorId);
 router.delete("/:id", deletarVendaPorId);
 
-module.exports = router;
+export { router as default };

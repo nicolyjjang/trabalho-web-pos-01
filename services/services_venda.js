@@ -1,5 +1,6 @@
-const fs = require('fs');
-const arquivoVendas = './assets/venda.json';
+import fs from "fs";
+
+const arquivoVendas = "./assets/venda.json";
 
 async function lerVendas() {
     const vendas = await fs.promises.readFile(arquivoVendas, 'utf-8');
@@ -30,10 +31,10 @@ async function deletarVenda(id) {
     await fs.promises.writeFile(arquivoVendas, JSON.stringify(indiceDeletado, null, 2));
 }
 
-module.exports = {
-    lerVendas,
-    pegarVendaPorId,
-    adicionarVenda,
-    atualizarVenda,
-    deletarVenda
-}
+export {
+  lerVendas,
+  pegarVendaPorId,
+  adicionarVenda,
+  atualizarVenda,
+  deletarVenda,
+};

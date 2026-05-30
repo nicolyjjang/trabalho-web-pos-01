@@ -1,28 +1,34 @@
-const express = require("express");
+import express from "express";
+import produtosRoutes from "./routes/routes_produtos.js";
+import rotasVenda from "./routes/routes_venda.js";
+import rotaPessoa from "./routes/routes_pessoa.js";
+import rotaCampanha from "./routes/campanha.js";
+import cors from "cors";
+import connectToDatabase from "./config/dbConnect.js";
+import mongoose from "mongoose";
+
 const app = express();
 const port = 8000;
 
-app.use(express.json());
-
-const produtosRoutes = require("./routes/routes_produtos");
-app.use("/produtos", produtosRoutes);
-
-const rotasVenda = require('./routes/routes_venda');
-app.use('/vendas', rotasVenda);
-
-const rotaPessoa = require("./routes/routes_pessoa");
-app.use("/pessoa", rotaPessoa);
-
-const rotaCampanha = require("./routes/campanha");
-app.use("/campanha", rotaCampanha);
-
-const rotasEntrada = require('./routes/routes_entrada');
-app.use('/entradas', rotasEntrada);
-
+try {
+  await connectToDatabase();
+  app.use(express.json());
+  app.use("/produtos", produtosRoutes);
+  app.use("/vendas", rotasVenda);
+  app.use("/pessoa", rotaPessoa);
+  app.use("/campanha", rotaCampanha);
+  mongoose.connection.on("error", (error) => {
+    console.error("Erro na conexão com o banco de dados:", error);
+  });
+  mongoose.connection.once("open", () => {
+    console.log("Conexão com o banco de dados estabelecida com sucesso!");
+  });
+  app.listen(port, () => {
+    console.log(`Mercadinho São Miguel escutando em http://localhost:${port}`);
+  });
+} catch (error) {
+  console.error("Erro ao conectar ao abnco de dados", error);
+}
 app.use("/", (req, res) => {
   res.send("Bem-vindo ao Mercadinho São Miguel!");
-});
-
-app.listen(port, () => {
-  console.log(`Mercadinho São Miguel escutando em http://localhost:${port}`);
 });
