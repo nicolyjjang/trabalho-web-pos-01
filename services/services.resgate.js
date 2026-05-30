@@ -1,14 +1,17 @@
-import fs from "fs";
+import {Resgaste} from "../Models/Resgaste.js";
 
 const caminhoArquivo = "./assets/resgates.json";
 
 async function getAllResgates() {
-  return JSON.parse(await fs.promises.readFile(caminhoArquivo, "utf-8"));
+  const resgates = await Resgaste.find();
+  return resgates;
 }
 
 async function getResgate(id) {
-  const resgates = await getAllResgates();
-  const resgate = resgates.find((resgate) => resgate.id === Number(id));
+  const resgates = await Resgate.findById(id);
+    if (!product){
+        throw new Error("")
+    }
   return resgate;
 }
 

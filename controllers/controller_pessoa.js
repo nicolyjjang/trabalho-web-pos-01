@@ -1,17 +1,19 @@
 import {
-  getTodosPessoas,
+  getAllPessoas,
   getPessoaPorId,
+  getPessoaPorNome,
   inserePessoa,
   modificaPessoa,
   deletarPessoa,
 } from "../services/services_pessoa.js";
+import mongoose from "mongoose";
 
 async function getPessoas(req, res) {
   try {
-    const dados = await getTodosPessoas();
-    res.status(200).send(dados);
+    const dados = await getAllPessoas();
+    res.status(200).json(dados);
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 }
 
@@ -19,14 +21,28 @@ async function getPessoa(req, res) {
   try {
     const id = req.params.id;
 
-    if (id && Number(id)) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       const dados = await getPessoaPorId(id);
-      res.status(200).send(dados);
+      res.status(200).json(dados);
     } else {
-      res.status(422).send({ error: "ID inválido" });
+      res.status(422).json({ error: "ID inválido" });
     }
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    res.status(500).json({ error: error.message });
+  }
+}
+
+async function getPessoaPorNomeController(req, res) {
+  try {
+    const nome = req.params.nome;
+    if (!nome) {
+      return res.status(422).json({ error: "Nome inválido" });
+    }
+
+    const pessoas = await getPessoaPorNome(nome);
+    res.status(200).json(pessoas);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 }
 
@@ -34,16 +50,16 @@ async function postPessoa(req, res) {
   try {
     const dados = req.body;
     if (dados.nome) {
-      await inserePessoa(dados);
-      res.status(201).send({
+      const pessoa = await inserePessoa(dados);
+      res.status(201).json({
         message: "Pessoa criada com sucesso",
-        pessoa: dados,
+        pessoa,
       });
     } else {
-      res.status(422).send("O nome da pessoa é obrigatório");
+      res.status(422).json({ error: "O nome da pessoa é obrigatório" });
     }
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 }
 
@@ -52,29 +68,42 @@ async function patchPessoa(req, res) {
     const id = req.params.id;
     const modificacoes = req.body;
 
-    if (id && Number(id)) {
-      await modificaPessoa(modificacoes, id);
-      res.status(200).send({ message: "Pessoa modificada com sucesso" });
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
+      const pessoa = await modificaPessoa(id, modificacoes);
+      res.status(200).json({
+        message: "Pessoa modificada com sucesso",
+        pessoa,
+      });
     } else {
-      res.status(422).send({ error: "ID inválido" });
+      res.status(422).json({ error: "ID inválido" });
     }
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 }
 
 async function deletePessoa(req, res) {
   try {
     const id = req.params.id;
-    if (id && Number(id)) {
-      await deletarPessoa(id);
-      res.status(200).send({ message: "Pessoa excluída com sucesso" });
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
+      const pessoa = await deletarPessoa(id);
+      res.status(200).json({
+        message: "Pessoa excluída com sucesso",
+        pessoa,
+      });
     } else {
-      res.status(422).send({ error: "ID inválido" });
+      res.status(422).json({ error: "ID inválido" });
     }
   } catch (error) {
-    res.status(500).send({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 }
 
-export { getPessoas, getPessoa, postPessoa, patchPessoa, deletePessoa };
+export {
+  getPessoas,
+  getPessoa,
+  getPessoaPorNomeController,
+  postPessoa,
+  patchPessoa,
+  deletePessoa,
+};
