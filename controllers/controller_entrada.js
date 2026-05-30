@@ -1,84 +1,103 @@
-const {
+import {
   lerEntradas,
   pegarEntradaPorId,
   adicionarEntrada,
   atualizarEntrada,
   deletarEntrada,
-} = require("../services/services_entrada");
+} from "../services/services_entrada.js";
+import mongoose from "mongoose";
 
 async function obterEntradas(req, res) {
   try {
     const entradas = await lerEntradas();
-    res.json(entradas);
+    res.send(entradas);
   } catch (error) {
-    res.status(500).json({ error: "Erro ao obter entradas" });
+    res.status(500).send({ error: "Erro ao obter entradas" });
   }
 }
 
 async function obterEntradaPorId(req, res) {
   try {
     const id = req.params.id;
-    if (id && !isNaN(Number(id))) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       const entrada = await pegarEntradaPorId(id);
       if (entrada) {
-        res.json(entrada);
+        res.send(entrada);
       } else {
-        res.status(404).json({ error: "Entrada não encontrada" });
+        res.status(404).send({ error: "Entrada não encontrada" });
       }
     } else {
-      res.status(400).json({ error: "ID não encontrado" });
+      res.status(400).send({ error: "ID não encontrado" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Erro ao obter entrada" });
+    res.status(500).send({ error: "Erro ao obter entrada" });
   }
 }
+
+async function obterEntradaPorNomeProduto(req, res) {
+  try {
+    const nomeProduto = req.params.nome_produto;
+    if (nomeProduto) {
+      const entrada = await pegarEntradaPorNomeProduto(nomeProduto);
+      if (entrada) {
+        res.send(entrada);
+      }
+    } else {
+      res.status(400).send({ error: "Nome do produto não encontrado" });
+    }
+  } catch (error) {
+    console.error("Erro ao obter a entrada por nome do produto:", error);
+  }
+}
+
 
 async function criarNovaEntrada(req, res) {
   try {
     const novaEntrada = req.body;
     if (novaEntrada) {
       await adicionarEntrada(novaEntrada);
-      res.status(201).json({ message: "Entrada criada com sucesso" });
+      res.status(201).send({ message: "Entrada criada com sucesso" });
     } else {
-      res.status(400).json({ error: "Dados da entrada não encontrados" });
+      res.status(400).send({ error: "Dados da entrada não encontrados" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Erro ao criar entrada" });
+    res.status(500).send({ error: "Erro ao criar entrada" });
   }
 }
 
 async function atualizarEntradaPorId(req, res) {
   try {
     const id = req.params.id;
-    if (id && !isNaN(Number(id))) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       const entradaAtualizada = req.body;
       await atualizarEntrada(id, entradaAtualizada);
-      res.json({ message: "Entrada atualizada com sucesso" });
+      res.send({ message: "Entrada atualizada com sucesso" });
     } else {
-      res.status(400).json({ error: "ID não encontrado" });
+      res.status(400).send({ error: "ID não encontrado" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Erro ao atualizar entrada" });
+    res.status(500).send({ error: "Erro ao atualizar entrada" });
   }
 }
 
 async function deletarEntradaPorId(req, res) {
   try {
     const id = req.params.id;
-    if (id && !isNaN(Number(id))) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       await deletarEntrada(id);
-      res.json({ message: "Entrada deletada com sucesso" });
+      res.send({ message: "Entrada deletada com sucesso" });
     } else {
-      res.status(400).json({ error: "ID não encontrado" });
+      res.status(400).send({ error: "ID não encontrado" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Erro ao deletar entrada" });
+    res.status(500).send({ error: "Erro ao deletar entrada" });
   }
 }
 
-module.exports = {
+export {
   obterEntradas,
   obterEntradaPorId,
+  obterEntradaPorNomeProduto,
   criarNovaEntrada,
   atualizarEntradaPorId,
   deletarEntradaPorId,
