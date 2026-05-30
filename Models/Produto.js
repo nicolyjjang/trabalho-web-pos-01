@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { campanhaSchema } from "./Campanha";
+import { campanhaSchema } from "./Campanha.js";
 
 const produtoSchema = new mongoose.Schema(
   {
