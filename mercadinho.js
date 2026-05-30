@@ -14,6 +14,8 @@ app.use(express.json());
 
 app.use("/pessoa", rotaPessoa);
 app.use("/campanha", rotaCampanha);
+app.use("/produtos", produtosRoutes);
+app.use("/venda", rotasVenda);
 
 app.use("/", (req, res) => {
   res.send("Bem-vindo ao Mercadinho São Miguel!");
