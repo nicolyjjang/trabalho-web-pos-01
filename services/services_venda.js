@@ -24,10 +24,10 @@ async function atualizarVenda(id, vendaAtualizada) {
         new: true, 
         runValidators: true,
     });
-    if (!vendaAtualizada) {
+    if (!venda) {
         throw new Error("Venda não encontrada.")
     }
-    return vendaAtualizada;
+    return venda;
     
 }
 
