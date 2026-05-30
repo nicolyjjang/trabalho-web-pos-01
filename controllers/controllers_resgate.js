@@ -5,6 +5,7 @@ import {
   updateResgate,
   deleteResgate,
 } from "../services/services.resgate.js";
+import mongoose from "mongoose";
 
 async function getAllResgatesController(req, res) {
   try {
@@ -18,7 +19,7 @@ async function getAllResgatesController(req, res) {
 async function getResgateController(req, res) {
   try {
     const id = req.params.id;
-    if (id && Number(id)) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       const resgate = await getResgate(id);
       if (!resgate) {
         return res.status(404).send("Resgate não encontrado");
@@ -51,7 +52,7 @@ async function createResgateController(req, res) {
 async function updateResgateController(req, res) {
   try {
     const id = req.params.id;
-    if (id && Number(id)) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       const body = req.body;
       await updateResgate(id, body);
       res.send("Resgate atualizado com sucesso");
@@ -66,7 +67,7 @@ async function updateResgateController(req, res) {
 async function deleteResgateController(req, res) {
   try {
     const id = req.params.id;
-    if (id && Number(id)) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       await deleteResgate(id);
       res.send("Resgate excluído com sucesso");
     } else {
