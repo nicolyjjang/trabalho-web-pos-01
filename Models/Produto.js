@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const produtoSchema = new mongoose.Schema(
   {
     nome: {
@@ -29,9 +30,15 @@ const produtoSchema = new mongoose.Schema(
     qtd_minima: {
       type: Number,
       default: 10,
+    },id_fornecedor: {
+      type: Number,
+    },
+    campanhas_ativas: {
+      type: [],
+      default: [],
     },
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const Produto = mongoose.model("Produto", produtoSchema);

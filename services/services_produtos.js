@@ -14,6 +14,25 @@ async function getProduct(id) {
     return product;
 }
 
+async function getProductByDescription(descricao) {
+    const product = await Produto.find({
+        descricao:{ $regex: descricao, $options: "i" },
+    });
+    if(!product.length){
+        throw new Error("Nenhum produto encontrado com a descrição fornecida");
+    }
+    return product;
+}
+
+async function getProductByBarCode(codigo_barras) {
+    const product = await Produto.findOne({ codigo_barras});
+    if(!product){
+        throw new Error("Nenhum produto encontrado com o código de barras fornecido");
+    }
+
+    return product;
+    }
+
 async function createProduct(dados) {
   const newProduct = new Produto(dados);
   const savedProduct = await newProduct.save();
@@ -44,5 +63,7 @@ export {
     getProduct, 
     createProduct,
     updateProduct,
-  deleteProduct,
+    deleteProduct,
+    getProductByDescription,
+    getProductByBarCode,
 };
