@@ -9,9 +9,9 @@ import {
 async function getAllResgatesController(req, res) {
   try {
     const resgates = await getAllResgates();
-    res.json(resgates);
+    res.send(resgates);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send({ error: error.message });
   }
 }
 
@@ -21,14 +21,14 @@ async function getResgateController(req, res) {
     if (id && Number(id)) {
       const resgate = await getResgate(id);
       if (!resgate) {
-        return res.status(404).json("Resgate não encontrado");
+        return res.status(404).send("Resgate não encontrado");
       }
-      res.json(resgate);
+      res.send(resgate);
     } else {
-      res.status(422).json("ID inválido");
+      res.status(422).send("ID inválido");
     }
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).send(error.message);
   }
 }
 
@@ -37,14 +37,14 @@ async function createResgateController(req, res) {
     const dados = req.body;
     if (req.body.id_cliente && req.body.itens_resgatados) {
       await createResgate(dados);
-      res.status(201).json("Resgate criado com sucesso");
+      res.status(201).send("Resgate criado com sucesso");
     } else {
       res
         .status(422)
-        .json('Campos "id_cliente" e "itens_resgatados" são obrigatórios');
+        .send('Campos "id_cliente" e "itens_resgatados" são obrigatórios');
     }
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).send(error.message);
   }
 }
 
@@ -54,12 +54,12 @@ async function updateResgateController(req, res) {
     if (id && Number(id)) {
       const body = req.body;
       await updateResgate(id, body);
-      res.json("Resgate atualizado com sucesso");
+      res.send("Resgate atualizado com sucesso");
     } else {
-      res.status(422).json("ID inválido");
+      res.status(422).send("ID inválido");
     }
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).send(error.message);
   }
 }
 
@@ -68,12 +68,12 @@ async function deleteResgateController(req, res) {
     const id = req.params.id;
     if (id && Number(id)) {
       await deleteResgate(id);
-      res.json("Resgate excluído com sucesso");
+      res.send("Resgate excluído com sucesso");
     } else {
-      res.status(422).json("ID inválido");
+      res.status(422).send("ID inválido");
     }
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).send(error.message);
   }
 }
 
