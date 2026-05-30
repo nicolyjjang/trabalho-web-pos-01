@@ -6,7 +6,7 @@ import {
   postCampanha,
   patchCampanha,
   deleteCampanha,
-} from "../controllers/controller_campanha";
+} from "../controllers/controller_campanha.js";
 
 const router = Router();
 
