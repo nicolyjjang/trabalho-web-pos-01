@@ -10,6 +10,7 @@ async function getProduct(id) {
   if (!product) {
     throw new Error("Produto não encontrado");
   }
+  
   return product;
 }
 
