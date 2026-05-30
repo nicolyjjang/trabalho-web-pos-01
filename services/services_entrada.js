@@ -1,5 +1,9 @@
 import { Entrada } from "../Models/Entrada.js";
 
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 async function lerEntradas() {
   const entradas = await Entrada.find();
   return entradas;
@@ -14,7 +18,8 @@ async function pegarEntradaPorId(id) {
 }
 
 async function pegarEntradaPorNomeProduto(nomeProduto) {
-  const entrada = await Entrada.findOne({ nome_produto: nomeProduto });
+  const regex = new RegExp(escapeRegExp(nomeProduto), "i");
+  const entrada = await Entrada.findOne({ "itens.nome_produto": regex });
   if (!entrada) {
     throw new Error("Entrada não encontrada.");
   }
@@ -32,10 +37,10 @@ async function atualizarEntrada(id, entradaAtualizada) {
     new: true,
     runValidators: true,
   });
-  if (!entradaAtualizada) {
+  if (!entrada) {
     throw new Error("Entrada não encontrada.");
   }
-  return entradaAtualizada;
+  return entrada;
 }
 
 async function deletarEntrada(id) {
@@ -48,6 +53,7 @@ async function deletarEntrada(id) {
 export {
   lerEntradas,
   pegarEntradaPorId,
+  pegarEntradaPorNomeProduto,
   adicionarEntrada,
   atualizarEntrada,
   deletarEntrada,

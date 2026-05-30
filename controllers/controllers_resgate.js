@@ -4,7 +4,7 @@ import {
   createResgate,
   updateResgate,
   deleteResgate,
-} from "../services/services.resgate.js";
+} from "../services/services_resgate.js";
 import mongoose from "mongoose";
 
 async function getAllResgatesController(req, res) {

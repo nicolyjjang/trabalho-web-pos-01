@@ -4,6 +4,7 @@ import rotasVenda from "./routes/routes_venda.js";
 import rotaPessoa from "./routes/routes_pessoa.js";
 import rotaCampanha from "./routes/routes_campanha.js";
 import rotaEntrada from "./routes/routes_entrada.js";
+import rotaResgate from "./routes/routes_resgate.js";
 
 import cors from "cors";
 import connectToDatabase from "./config/dbConnect.js";
@@ -15,11 +16,13 @@ const port = 8000;
 try {
   await connectToDatabase();
   app.use(express.json());
+  app.use(cors());
   app.use("/produtos", produtosRoutes);
   app.use("/vendas", rotasVenda);
   app.use("/pessoa", rotaPessoa);
   app.use("/campanha", rotaCampanha);
   app.use("/entrada", rotaEntrada);
+  app.use("/resgate", rotaResgate);
 
   mongoose.connection.on("error", (error) => {
     console.error("Erro na conexão com o banco de dados:", error);

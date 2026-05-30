@@ -1,6 +1,7 @@
 import {
   lerEntradas,
   pegarEntradaPorId,
+  pegarEntradaPorNomeProduto,
   adicionarEntrada,
   atualizarEntrada,
   deletarEntrada,
@@ -36,17 +37,20 @@ async function obterEntradaPorId(req, res) {
 
 async function obterEntradaPorNomeProduto(req, res) {
   try {
-    const nomeProduto = req.params.nome_produto;
+    const nomeProduto = req.params.nomeProduto;
     if (nomeProduto) {
       const entrada = await pegarEntradaPorNomeProduto(nomeProduto);
       if (entrada) {
         res.send(entrada);
+      } else {
+        res.status(404).send({ error: "Entrada não encontrada" });
       }
     } else {
       res.status(400).send({ error: "Nome do produto não encontrado" });
     }
   } catch (error) {
     console.error("Erro ao obter a entrada por nome do produto:", error);
+    res.status(500).send({ error: "Erro ao obter entrada por nome do produto" });
   }
 }
 

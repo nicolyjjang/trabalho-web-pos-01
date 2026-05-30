@@ -11,8 +11,8 @@ import {
 const router = Router();
 
 router.get("/", obterEntradas);
+router.get("/produto/:nomeProduto", obterEntradaPorNomeProduto);
 router.get("/:id", obterEntradaPorId);
-router.get("/produto/:nomeProduto", obterEntradaPorNomeProduto)
 router.post("/", criarNovaEntrada);
 router.patch("/:id", atualizarEntradaPorId);
 router.delete("/:id", deletarEntradaPorId);
