@@ -40,4 +40,4 @@ const pessoaSchema = new mongoose.Schema(
 
 const Pessoa = mongoose.model("Pessoa", pessoaSchema);
 
-export { Pessoa };
+export { Pessoa, pessoaSchema };
