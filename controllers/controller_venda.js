@@ -1,10 +1,10 @@
-const {
+import {
   lerVendas,
   pegarVendaPorId,
   adicionarVenda,
   atualizarVenda,
   deletarVenda,
-} = require("../services/services_venda");
+} from "../services/services_venda.js";
 
 async function obterVendas(req, res) {
   try {
@@ -76,7 +76,7 @@ async function deletarVendaPorId(req, res) {
   }
 }
 
-module.exports = {
+export {
   obterVendas,
   obterVendaPorId,
   criarNovaVenda,

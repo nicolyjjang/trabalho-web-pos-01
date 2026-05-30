@@ -1,4 +1,5 @@
-const fs = require("fs");
+import fs from "fs";
+
 const arquivoVendas = "./assets/venda.json";
 
 async function lerVendas() {
@@ -41,7 +42,7 @@ async function deletarVenda(id) {
   );
 }
 
-module.exports = {
+export {
   lerVendas,
   pegarVendaPorId,
   adicionarVenda,
