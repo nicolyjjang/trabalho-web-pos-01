@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { campanhaSchema } from "./Campanha";
 
 const produtoSchema = new mongoose.Schema(
   {
@@ -30,6 +31,7 @@ const produtoSchema = new mongoose.Schema(
       type: Number,
       default: 10,
     },
+    campanhas_ativas: [campanhaSchema],
   },
   { timestamps: true },
 );
