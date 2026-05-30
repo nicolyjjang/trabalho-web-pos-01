@@ -28,6 +28,7 @@ async function atualizarVenda(id, vendaAtualizada) {
         throw new Error("Venda não encontrada.")
     }
     return vendaAtualizada;
+    
 }
 
 async function deletarVenda(id) {
