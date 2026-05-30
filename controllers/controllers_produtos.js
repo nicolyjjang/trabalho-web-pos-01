@@ -10,9 +10,9 @@ import mongoose from "mongoose";
 async function getAllProductsController(req, res) {
   try {
     const products = await getAllProducts();
-    res.json(products);
+    res.send(products);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).send({ error: error.message });
   }
 }
 
@@ -21,12 +21,12 @@ async function getProductController(req, res) {
     const id = req.params.id;
     if (id && mongoose.Types.ObjectId.isValid(id)) {
       const product = await getProduct(id);
-      res.json(product);
+      res.send(product);
     } else {
-      res.status(422).json("ID inválido");
+      res.status(422).send("ID inválido");
     }
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).send(error.message);
   }
 }
 
@@ -35,12 +35,12 @@ async function createProductController(req, res) {
     const dados = req.body;
     if (req.body.nome) {
       const produto = await createProduct(dados);
-      res.status(201).json(produto);
+      res.status(201).send(produto);
     } else {
-      res.status(422).json('Campo "nome" é obrigatório');
+      res.status(422).send('Campo "nome" é obrigatório');
     }
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).send(error.message);
   }
 }
 
@@ -50,12 +50,12 @@ async function updateProductController(req, res) {
     if (id && mongoose.Types.ObjectId.isValid(id)) {
       const body = req.body;
       const produto = await updateProduct(id, body);
-      res.json(produto);
+      res.send(produto);
     } else {
-      res.status(422).json("ID inválido");
+      res.status(422).send("ID inválido");
     }
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).send(error.message);
   }
 }
 
@@ -64,12 +64,12 @@ async function deleteProductController(req, res) {
     const id = req.params.id;
     if (id && mongoose.Types.ObjectId.isValid(id)) {
       const produto = await deleteProduct(id);
-      res.json({ message: "Produto excluído com sucesso", produto });
+      res.send({ message: "Produto excluído com sucesso", produto });
     } else {
-      res.status(422).json("ID inválido");
+      res.status(422).send("ID inválido");
     }
   } catch (error) {
-    res.status(500).json(error.message);
+    res.status(500).send(error.message);
   }
 }
 
