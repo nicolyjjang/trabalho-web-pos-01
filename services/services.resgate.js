@@ -1,4 +1,4 @@
-import {Resgate} from "../Models/Resgaste.js";
+import { Resgate } from "../Models/Resgate.js";
 
 async function getAllResgates() {
   const resgates = await Resgate.find();
@@ -6,10 +6,10 @@ async function getAllResgates() {
 }
 
 async function getResgate(id) {
-  const resgates = await Resgate.findById(id);
-    if (!resgates){
-        throw new Error("Resgate não encontrado")
-    }
+  const resgate = await Resgate.findById(id);
+  if (!resgate) {
+    throw new Error("Resgate não encontrado");
+  }
   return resgate;
 }
 
@@ -20,22 +20,22 @@ async function createResgate(dados) {
 }
 
 async function updateResgate(id, modificacoes) {
-  const updateResgate = await Resgate.findByIdAndUpdate(id, modificacoes, {
+  const updatedResgate = await Resgate.findByIdAndUpdate(id, modificacoes, {
     new: true,
     runValidators: true,
   });
-  if (!updateResgate){
+  if (!updatedResgate) {
     throw new Error("Resgate não encontrado");
   }
-  return updatedProduct;
+  return updatedResgate;
 }
 
 async function deleteResgate(id) {
-    const deleteResgate = await Resgate.findByIdAndDelete(id);
-    if(!deletedResgate){
-        throw new Error("Resgate não encontrado");
-    }
-    return deletedResgate;
+  const deletedResgate = await Resgate.findByIdAndDelete(id);
+  if (!deletedResgate) {
+    throw new Error("Resgate não encontrado");
+  }
+  return deletedResgate;
 }
 
 export {
