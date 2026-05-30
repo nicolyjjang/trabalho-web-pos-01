@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "data_entrada": "2026-01-05T10:00:00Z",
+    "valor_total": 1500,
+    "id_fornecedor": 21,
+    "itens": [
+      {
+        "id_produto": 100,
+        "nome_produto": "FEIJÃO",
+        "quantidade": 100,
+        "valor_unitario_custo": 7
+      },
+      {
+        "id_produto": 101,
+        "nome_produto": "FEIJÃO",
+        "quantidade": 80,
+        "valor_unitario_custo": 5
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "data_entrada": "2026-01-10T10:00:00Z",
+    "valor_total": 800,
+    "id_fornecedor": 22,
+    "itens": [
+      {
+        "id_produto": 102,
+        "nome_produto": "CAFÉ",
+        "quantidade": 60,
+        "valor_unitario_custo": 4
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "data_entrada": "2026-01-15T10:00:00Z",
+    "valor_total": 600,
+    "id_fornecedor": 23,
+    "itens": [
+      {
+        "id_produto": 103,
+        "nome_produto": "AÇÚCAR",
+        "quantidade": 70,
+        "valor_unitario_custo": 2.5
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "data_entrada": "2026-02-01T10:00:00Z",
+    "valor_total": 500,
+    "id_fornecedor": 24,
+    "itens": [
+      {
+        "id_produto": 104,
+        "nome_produto": "SAL",
+        "quantidade": 40,
+        "valor_unitario_custo": 1
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "data_entrada": "2026-02-10T10:00:00Z",
+    "valor_total": 1200,
+    "id_fornecedor": 25,
+    "itens": [
+      {
+        "id_produto": 105,
+        "nome_produto": "MACARRÃO",
+        "quantidade": 90,
+        "valor_unitario_custo": 2
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "data_entrada": "2026-02-20T10:00:00Z",
+    "valor_total": 400,
+    "id_fornecedor": 26,
+    "itens": [
+      {
+        "id_produto": 106,
+        "nome_produto": "LEITE",
+        "quantidade": 110,
+        "valor_unitario_custo": 3.5
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "data_entrada": "2026-03-01T10:00:00Z",
+    "valor_total": 900,
+    "id_fornecedor": 27,
+    "itens": [
+      {
+        "id_produto": 107,
+        "nome_produto": "ÓLEO",
+        "quantidade": 55,
+        "valor_unitario_custo": 4.5
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "data_entrada": "2026-03-10T10:00:00Z",
+    "valor_total": 700,
+    "id_fornecedor": 28,
+    "itens": [
+      {
+        "id_produto": 108,
+        "nome_produto": "MARGARINA",
+        "quantidade": 30,
+        "valor_unitario_custo": 3
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "data_entrada": "2026-03-20T10:00:00Z",
+    "valor_total": 650,
+    "id_fornecedor": 29,
+    "itens": [
+      {
+        "id_produto": 109,
+        "nome_produto": "BISCOITO",
+        "quantidade": 75,
+        "valor_unitario_custo": 1.8
+      }
+    ]
+  }
+]
