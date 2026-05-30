@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 
-import pessoaSchema from "./Pessoa.js";
-
-import produtoSchema from "./Produto.js";
+import { pessoaSchema } from "./Pessoa.js";
+import { produtoSchema } from "./Produto.js";
 
 const entradaSchema = new mongoose.Schema(
     {

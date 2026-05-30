@@ -1,4 +1,4 @@
-import { Entrada } from "../models/model_entrada.js";
+import { Entrada } from "../Models/Entrada.js";
 
 async function lerEntradas() {
   const entradas = await Entrada.find();
@@ -28,7 +28,7 @@ async function adicionarEntrada(novaEntrada) {
 }
 
 async function atualizarEntrada(id, entradaAtualizada) {
-  const entradaAtualizada = await Entrada.findByIdAndUpdate(id, entradaAtualizada, {
+  const entrada = await Entrada.findByIdAndUpdate(id, entradaAtualizada, {
     new: true,
     runValidators: true,
   });

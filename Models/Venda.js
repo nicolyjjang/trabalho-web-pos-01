@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-
-import pessoaSchema from "./Pessoa.js";
-import produtoSchema from "./Produto.js";
+import { pessoaSchema } from "./Pessoa.js";
+import { produtoSchema } from "./Produto.js";
 
 const vendaSchema = new mongoose.Schema({
   id: { type: mongoose.Schema.Types.ObjectId },
