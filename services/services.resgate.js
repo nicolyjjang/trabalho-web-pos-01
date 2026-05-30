@@ -1,52 +1,41 @@
-import {Resgaste} from "../Models/Resgaste.js";
-
-const caminhoArquivo = "./assets/resgates.json";
+import {Resgate} from "../Models/Resgaste.js";
 
 async function getAllResgates() {
-  const resgates = await Resgaste.find();
+  const resgates = await Resgate.find();
   return resgates;
 }
 
 async function getResgate(id) {
   const resgates = await Resgate.findById(id);
-    if (!product){
-        throw new Error("")
+    if (!resgates){
+        throw new Error("Resgate não encontrado")
     }
   return resgate;
 }
 
 async function createResgate(dados) {
-  const resgates = await getAllResgates();
-  const newResgate = [...resgates, dados];
-  fs.writeFileSync(caminhoArquivo, JSON.stringify(newResgate, null, 2));
-  return newResgate;
+  const newResgate = new Resgate(dados);
+  const savedResgate = await newResgate.save();
+  return savedResgate;
 }
 
 async function updateResgate(id, modificacoes) {
-  const resgates = await getAllResgates();
-  const resgateIndex = resgates.findIndex(
-    (resgate) => resgate.id === Number(id),
-  );
-  if (resgateIndex === -1) {
+  const updateResgate = await Resgate.findByIdAndUpdate(id, modificacoes, {
+    new: true,
+    runValidators: true,
+  });
+  if (!updateResgate){
     throw new Error("Resgate não encontrado");
   }
-  const updatedResgate = { ...resgates[resgateIndex], ...modificacoes };
-  resgates[resgateIndex] = updatedResgate;
-  fs.writeFileSync(caminhoArquivo, JSON.stringify(resgates, null, 2));
-  return updatedResgate;
+  return updatedProduct;
 }
 
 async function deleteResgate(id) {
-  const resgates = await getAllResgates();
-  const resgateIndex = resgates.findIndex(
-    (resgate) => resgate.id === Number(id),
-  );
-  if (resgateIndex === -1) {
-    throw new Error("Resgate não encontrado");
-  }
-  resgates.splice(resgateIndex, 1);
-  fs.writeFileSync(caminhoArquivo, JSON.stringify(resgates, null, 2));
-  return resgates;
+    const deleteResgate = await Resgate.findByIdAndDelete(id);
+    if(!deletedResgate){
+        throw new Error("Resgate não encontrado");
+    }
+    return deletedResgate;
 }
 
 export {

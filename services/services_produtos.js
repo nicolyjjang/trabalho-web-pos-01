@@ -11,7 +11,7 @@ async function getProduct(id) {
     throw new Error("Produto não encontrado");
   }
   
-  return product;
+    return product;
 }
 
 async function createProduct(dados) {
@@ -28,21 +28,21 @@ async function updateProduct(id, modificacoes) {
   if (!updatedProduct) {
     throw new Error("Produto não encontrado");
   }
-  return updatedProduct;
+    return updatedProduct;
 }
 
 async function deleteProduct(id) {
   const deletedProduct = await Produto.findByIdAndDelete(id);
   if (!deletedProduct) {
     throw new Error("Produto não encontrado");
-  }
+    }
   return deletedProduct;
 }
 
 export {
-  getAllProducts,
-  getProduct,
-  createProduct,
-  updateProduct,
+    getAllProducts,
+    getProduct, 
+    createProduct,
+    updateProduct,
   deleteProduct,
 };

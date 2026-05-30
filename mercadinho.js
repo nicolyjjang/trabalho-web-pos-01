@@ -27,7 +27,7 @@ try {
     console.log(`Mercadinho São Miguel escutando em http://localhost:${port}`);
   });
 } catch (error) {
-  console.error("Erro ao conectar ao abnco de dados", error);
+  console.error("Erro ao conectar ao banco de dados", error);
 }
 app.use("/", (req, res) => {
   res.send("Bem-vindo ao Mercadinho São Miguel!");
