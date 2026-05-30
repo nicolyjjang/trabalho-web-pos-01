@@ -4,6 +4,8 @@ import {
   createProduct,
   updateProduct,
   deleteProduct,
+  getProductByDescription,    
+  getProductByBarCode,
 } from "../services/services_produtos.js";
 import mongoose from "mongoose";
 
@@ -28,6 +30,32 @@ async function getProductController(req, res) {
   } catch (error) {
     res.status(500).send(error.message);
   }
+}
+
+async function getProductByDescriptionController(req, res) {
+    try{
+        const {descricao} = req.params;
+        if(!descricao || descricao.trim() === ""){
+            return res.status(422).send("A descrição é obrigatória");
+        }
+        const products = await getProductByDescription(descricao);
+        res.send(products);
+    }catch(error){
+        res.status(500).send(error.message);
+    };
+}
+
+async function getProductByBarCodeController(req, res) {
+    try{
+        const {codigo_barras} = req.params;
+        if(!codigo_barras ||  codigo_barras.trim() === ""){
+            return res.status(422).send("O código de barras é obrigatório");
+        }
+        const products = await getProductByBarCode(codigo_barras);
+        res.send(products);
+    }catch(error){
+        res.status(500).send(error.message);
+    }
 }
 
 async function createProductController(req, res) {
@@ -79,4 +107,6 @@ export {
   createProductController,
   updateProductController,
   deleteProductController,
+  getProductByDescriptionController,
+  getProductByBarCodeController,
 };
