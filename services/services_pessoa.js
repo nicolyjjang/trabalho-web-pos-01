@@ -13,6 +13,19 @@ async function getPessoaPorId(id) {
   return pessoa;
 }
 
+function escapeRegExp(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+async function getPessoaPorNome(nome) {
+  const regex = new RegExp(escapeRegExp(nome), "i");
+  const pessoas = await Pessoa.find({ nome: regex });
+  if (!pessoas.length) {
+    throw new Error("Pessoa não encontrada");
+  }
+  return pessoas;
+}
+
 async function inserePessoa(dados) {
   const novaPessoa = new Pessoa(dados);
   const savedPessoa = await novaPessoa.save();
@@ -41,6 +54,7 @@ async function deletarPessoa(id) {
 export {
   getAllPessoas,
   getPessoaPorId,
+  getPessoaPorNome,
   inserePessoa,
   modificaPessoa,
   deletarPessoa,

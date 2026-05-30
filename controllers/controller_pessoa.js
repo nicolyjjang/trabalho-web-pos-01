@@ -1,6 +1,7 @@
 import {
   getAllPessoas,
   getPessoaPorId,
+  getPessoaPorNome,
   inserePessoa,
   modificaPessoa,
   deletarPessoa,
@@ -26,6 +27,20 @@ async function getPessoa(req, res) {
     } else {
       res.status(422).json({ error: "ID inválido" });
     }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+async function getPessoaPorNomeController(req, res) {
+  try {
+    const nome = req.params.nome;
+    if (!nome) {
+      return res.status(422).json({ error: "Nome inválido" });
+    }
+
+    const pessoas = await getPessoaPorNome(nome);
+    res.status(200).json(pessoas);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -84,4 +99,11 @@ async function deletePessoa(req, res) {
   }
 }
 
-export { getPessoas, getPessoa, postPessoa, patchPessoa, deletePessoa };
+export {
+  getPessoas,
+  getPessoa,
+  getPessoaPorNomeController,
+  postPessoa,
+  patchPessoa,
+  deletePessoa,
+};

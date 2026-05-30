@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   getPessoas,
   getPessoa,
+  getPessoaPorNomeController,
   postPessoa,
   patchPessoa,
   deletePessoa,
@@ -10,6 +11,7 @@ import {
 const router = Router();
 
 router.get("/", getPessoas);
+router.get("/nome/:nome", getPessoaPorNomeController);
 router.get("/:id", getPessoa);
 router.post("/", postPessoa);
 router.patch("/:id", patchPessoa);
