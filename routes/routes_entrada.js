@@ -1,18 +1,20 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
   obterEntradas,
   obterEntradaPorId,
+  obterEntradaPorNomeProduto,
   criarNovaEntrada,
   atualizarEntradaPorId,
   deletarEntradaPorId,
-} = require("../controllers/controller_entrada");
+} from "../controllers/controller_entrada.js";
 
 const router = Router();
 
 router.get("/", obterEntradas);
 router.get("/:id", obterEntradaPorId);
+router.get("/produto/:nomeProduto", obterEntradaPorNomeProduto)
 router.post("/", criarNovaEntrada);
 router.patch("/:id", atualizarEntradaPorId);
 router.delete("/:id", deletarEntradaPorId);
 
-module.exports = router;
+export default router;
