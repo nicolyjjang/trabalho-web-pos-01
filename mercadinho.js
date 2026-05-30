@@ -10,18 +10,25 @@ import mongoose from "mongoose";
 const app = express();
 const port = 8000;
 
-app.use(express.json());
-app.use(cors());
-
-app.use("/pessoa", rotaPessoa);
-app.use("/campanha", rotaCampanha);
-app.use("/produtos", produtosRoutes);
-app.use("/venda", rotasVenda);
-
+try {
+  await connectToDatabase();
+  app.use(express.json());
+  app.use("/produtos", produtosRoutes);
+  app.use("/vendas", rotasVenda);
+  app.use("/pessoa", rotaPessoa);
+  app.use("/campanha", rotaCampanha);
+  mongoose.connection.on("error", (error) => {
+    console.error("Erro na conexão com o banco de dados:", error);
+  });
+  mongoose.connection.once("open", () => {
+    console.log("Conexão com o banco de dados estabelecida com sucesso!");
+  });
+  app.listen(port, () => {
+    console.log(`Mercadinho São Miguel escutando em http://localhost:${port}`);
+  });
+} catch (error) {
+  console.error("Erro ao conectar ao banco de dados", error);
+}
 app.use("/", (req, res) => {
   res.send("Bem-vindo ao Mercadinho São Miguel!");
-});
-
-app.listen(port, () => {
-  console.log(`Mercadinho Sâo Miguel escutando em http://localhost:${port}`);
 });
