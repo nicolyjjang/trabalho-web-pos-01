@@ -24,4 +24,4 @@ const campanhaSchema = new mongoose.Schema(
 
 const Campanha = mongoose.model("Campanha", campanhaSchema);
 
-export { Campanha };
+export { Campanha, campanhaSchema };

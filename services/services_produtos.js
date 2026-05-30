@@ -11,8 +11,27 @@ async function getProduct(id) {
     throw new Error("Produto não encontrado");
   }
   
-  return product;
+    return product;
 }
+
+async function getProductByDescription(descricao) {
+    const product = await Produto.find({
+        descricao:{ $regex: descricao, $options: "i" },
+    });
+    if(!product.length){
+        throw new Error("Nenhum produto encontrado com a descrição fornecida");
+    }
+    return product;
+}
+
+async function getProductByBarCode(codigo_barras) {
+    const product = await Produto.findOne({ codigo_barras});
+    if(!product){
+        throw new Error("Nenhum produto encontrado com o código de barras fornecido");
+    }
+
+    return product;
+    }
 
 async function createProduct(dados) {
   const newProduct = new Produto(dados);
@@ -28,21 +47,23 @@ async function updateProduct(id, modificacoes) {
   if (!updatedProduct) {
     throw new Error("Produto não encontrado");
   }
-  return updatedProduct;
+    return updatedProduct;
 }
 
 async function deleteProduct(id) {
   const deletedProduct = await Produto.findByIdAndDelete(id);
   if (!deletedProduct) {
     throw new Error("Produto não encontrado");
-  }
+    }
   return deletedProduct;
 }
 
 export {
-  getAllProducts,
-  getProduct,
-  createProduct,
-  updateProduct,
-  deleteProduct,
+    getAllProducts,
+    getProduct, 
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    getProductByDescription,
+    getProductByBarCode,
 };

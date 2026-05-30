@@ -5,6 +5,7 @@ import {
   atualizarVenda,
   deletarVenda,
 } from "../services/services_venda.js";
+import mongoose from "mongoose";
 
 async function obterVendas(req, res) {
   try {
@@ -18,7 +19,7 @@ async function obterVendas(req, res) {
 async function obterVendaPorId(req, res) {
   try {
     const id = req.params.id;
-    if (id && !isNaN(Number(id))) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       const venda = await pegarVendaPorId(id);
       if (venda) {
         res.send(venda);
@@ -50,7 +51,7 @@ async function criarNovaVenda(req, res) {
 async function atualizarVendaPorId(req, res) {
   try {
     const id = req.params.id;
-    if (id && !isNaN(Number(id))) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       const vendaAtualizada = req.body;
       await atualizarVenda(id, vendaAtualizada);
       res.send({ message: "Venda atualizada com sucesso" });
@@ -65,7 +66,7 @@ async function atualizarVendaPorId(req, res) {
 async function deletarVendaPorId(req, res) {
   try {
     const id = req.params.id;
-    if (id && !isNaN(Number(id))) {
+    if (id && mongoose.Types.ObjectId.isValid(id)) {
       await deletarVenda(id);
       res.send({ message: "Venda deletada com sucesso" });
     } else {

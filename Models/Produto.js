@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { campanhaSchema } from "./Campanha.js";
+
 
 const produtoSchema = new mongoose.Schema(
   {
@@ -29,11 +31,18 @@ const produtoSchema = new mongoose.Schema(
     qtd_minima: {
       type: Number,
       default: 10,
+    },id_fornecedor: {
+      type: Number,
     },
+    campanhas_ativas: {
+      type: [],
+      default: [],
+    },
+    campanhas_ativas: [campanhaSchema],
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 const Produto = mongoose.model("Produto", produtoSchema);
 
-export { Produto };
+export { Produto, produtoSchema };
