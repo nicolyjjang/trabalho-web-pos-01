@@ -1,15 +1,12 @@
-import fs from "fs";
+import { Pessoa } from "../Models/Pessoa.js";
 
-const caminhoArquivo = "./assets/pessoa.json";
-
-async function getTodosPessoas(req, res) {
-  const result = await JSON.parse(fs.readFileSync(caminhoArquivo));
-  return result;
+async function getAllPessoas() {
+  const pessoas = await Pessoa.find();
+  return pessoas;
 }
 
 async function getPessoaPorId(id) {
-  const pessoas = await getTodosPessoas();
-  const pessoa = pessoas.find((pessoa) => pessoa.id == id);
+  const pessoa = await Pessoa.findById(id);
   if (!pessoa) {
     throw new Error("Pessoa não encontrada");
   }
@@ -17,42 +14,32 @@ async function getPessoaPorId(id) {
 }
 
 async function inserePessoa(dados) {
-  const pessoas = await getTodosPessoas();
-  const novaListaDePessoas = [...pessoas, dados];
-  fs.writeFileSync(caminhoArquivo, JSON.stringify(novaListaDePessoas));
+  const novaPessoa = new Pessoa(dados);
+  const savedPessoa = await novaPessoa.save();
+  return savedPessoa;
 }
 
-async function modificaPessoa(modificacoes, id) {
-  let pessoasAtuais = await getTodosPessoas();
-
-  const indiceModificado = pessoasAtuais.findIndex((pessoa) => pessoa.id == id);
-
-  if (indiceModificado === -1) {
+async function modificaPessoa(id, modificacoes) {
+  const pessoaAtualizada = await Pessoa.findByIdAndUpdate(id, modificacoes, {
+    new: true,
+    runValidators: true,
+  });
+  if (!pessoaAtualizada) {
     throw new Error("Pessoa não encontrada para modificação");
   }
-
-  const conteudoMudado = {
-    ...pessoasAtuais[indiceModificado],
-    ...modificacoes,
-  };
-  pessoasAtuais[indiceModificado] = conteudoMudado;
-
-  fs.writeFileSync(caminhoArquivo, JSON.stringify(pessoasAtuais));
+  return pessoaAtualizada;
 }
 
 async function deletarPessoa(id) {
-  let pessoasAtuais = await getTodosPessoas();
-  const novaListaDePessoas = pessoasAtuais.filter((pessoa) => pessoa.id != id);
-
-  if (pessoasAtuais.length === novaListaDePessoas.length) {
+  const pessoaDeletada = await Pessoa.findByIdAndDelete(id);
+  if (!pessoaDeletada) {
     throw new Error("Pessoa não encontrada para exclusão");
   }
-
-  fs.writeFileSync(caminhoArquivo, JSON.stringify(novaListaDePessoas));
+  return pessoaDeletada;
 }
 
 export {
-  getTodosPessoas,
+  getAllPessoas,
   getPessoaPorId,
   inserePessoa,
   modificaPessoa,
