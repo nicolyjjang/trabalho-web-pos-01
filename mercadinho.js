@@ -1,4 +1,12 @@
-const express = require("express");
+import express from "express";
+import produtosRoutes from "./routes/routes_produtos.js";
+import rotasVenda from "./routes/routes_venda.js";
+import rotaPessoa from "./routes/routes_pessoa.js";
+import rotaCampanha from "./routes/campanha.js";
+import cors from "cors";
+import connectToDatabase from "./config/dbConnect.js";
+import mongoose from "mongoose";
+
 const app = express();
 const port = 8000;
 

@@ -1,21 +1,18 @@
-const { Router } = require("express");
-const {
+import { Router } from "express";
+import {
   getPessoas,
   getPessoa,
   postPessoa,
   patchPessoa,
   deletePessoa,
-} = require("../controllers/controller_pessoa");
+} from "../controllers/controller_pessoa.js";
+
 const router = Router();
 
 router.get("/", getPessoas);
-
 router.get("/:id", getPessoa);
-
 router.post("/", postPessoa);
-
 router.patch("/:id", patchPessoa);
-
 router.delete("/:id", deletePessoa);
 
-module.exports = router;
+export { router as default };

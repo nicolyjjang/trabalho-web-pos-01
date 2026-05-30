@@ -1,4 +1,4 @@
-const fs = require("fs");
+import fs from "fs";
 
 const caminhoArquivo = "./assets/pessoa.json";
 
@@ -22,17 +22,19 @@ async function inserePessoa(dados) {
   fs.writeFileSync(caminhoArquivo, JSON.stringify(novaListaDePessoas));
 }
 
-
 async function modificaPessoa(modificacoes, id) {
   let pessoasAtuais = await getTodosPessoas();
-  
+
   const indiceModificado = pessoasAtuais.findIndex((pessoa) => pessoa.id == id);
 
   if (indiceModificado === -1) {
     throw new Error("Pessoa não encontrada para modificação");
   }
 
-  const conteudoMudado = { ...pessoasAtuais[indiceModificado], ...modificacoes };
+  const conteudoMudado = {
+    ...pessoasAtuais[indiceModificado],
+    ...modificacoes,
+  };
   pessoasAtuais[indiceModificado] = conteudoMudado;
 
   fs.writeFileSync(caminhoArquivo, JSON.stringify(pessoasAtuais));
@@ -49,7 +51,7 @@ async function deletarPessoa(id) {
   fs.writeFileSync(caminhoArquivo, JSON.stringify(novaListaDePessoas));
 }
 
-module.exports = {
+export {
   getTodosPessoas,
   getPessoaPorId,
   inserePessoa,

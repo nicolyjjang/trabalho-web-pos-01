@@ -1,10 +1,10 @@
-const {
+import {
   getTodosPessoas,
   getPessoaPorId,
   inserePessoa,
   modificaPessoa,
   deletarPessoa,
-} = require("../services/services_pessoa");
+} from "../services/services_pessoa.js";
 
 async function getPessoas(req, res) {
   try {
@@ -77,10 +77,4 @@ async function deletePessoa(req, res) {
   }
 }
 
-module.exports = {
-  getPessoas,
-  getPessoa,
-  postPessoa,
-  patchPessoa,
-  deletePessoa,
-};
+export { getPessoas, getPessoa, postPessoa, patchPessoa, deletePessoa };

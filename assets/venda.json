@@ -1,0 +1,257 @@
+[
+  {
+    "id": 10,
+    "data_venda": "2026-02-10T10:00:00Z",
+    "valor_total": 150,
+    "pontos_ganhos_total": 15,
+    "id_cliente": 1,
+    "id_funcionario": 11,
+    "itens": [
+      {
+        "id_produto": 100,
+        "nome_produto": "ARROZ",
+        "quantidade": 5,
+        "preco_unitario": 9.5,
+        "desconto": 0,
+        "pontos_ganhos_unit": 5
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "DINHEIRO",
+        "valor": 150,
+        "data": "2026-02-10T10:05:00Z"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "data_venda": "2026-05-15T15:30:00Z",
+    "valor_total": 200,
+    "pontos_ganhos_total": 20,
+    "id_cliente": 1,
+    "id_funcionario": 12,
+    "itens": [
+      {
+        "id_produto": 101,
+        "nome_produto": "FEIJÃO",
+        "quantidade": 4,
+        "preco_unitario": 8.5,
+        "desconto": 0,
+        "pontos_ganhos_unit": 4
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "CREDITO",
+        "valor": 200,
+        "data": "2026-05-15T15:35:00Z"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "data_venda": "2026-08-10T11:00:00Z",
+    "valor_total": 100,
+    "pontos_ganhos_total": 10,
+    "id_cliente": 2,
+    "id_funcionario": 13,
+    "itens": [
+      {
+        "id_produto": 102,
+        "nome_produto": "CAFÉ",
+        "quantidade": 3,
+        "preco_unitario": 7.9,
+        "desconto": 0,
+        "pontos_ganhos_unit": 3
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "DEBITO",
+        "valor": 100,
+        "data": "2026-08-10T11:05:00Z"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "data_venda": "2026-11-20T18:45:00Z",
+    "valor_total": 300,
+    "pontos_ganhos_total": 30,
+    "id_cliente": 3,
+    "id_funcionario": 14,
+    "itens": [
+      {
+        "id_produto": 103,
+        "nome_produto": "AÇÚCAR",
+        "quantidade": 10,
+        "preco_unitario": 4.5,
+        "desconto": 0,
+        "pontos_ganhos_unit": 10
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "PIX",
+        "valor": 300,
+        "data": "2026-11-20T18:50:00Z"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "data_venda": "2026-03-01T09:15:00Z",
+    "valor_total": 80,
+    "pontos_ganhos_total": 5,
+    "id_cliente": 4,
+    "id_funcionario": 15,
+    "itens": [
+      {
+        "id_produto": 104,
+        "nome_produto": "SAL",
+        "quantidade": 8,
+        "preco_unitario": 2.5,
+        "desconto": 0,
+        "pontos_ganhos_unit": 2
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "DINHEIRO",
+        "valor": 80,
+        "data": "2026-03-01T09:20:00Z"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "data_venda": "2026-03-15T14:20:00Z",
+    "valor_total": 60,
+    "pontos_ganhos_total": 3,
+    "id_cliente": 5,
+    "id_funcionario": 16,
+    "itens": [
+      {
+        "id_produto": 105,
+        "nome_produto": "MACARRÃO",
+        "quantidade": 6,
+        "preco_unitario": 4.2,
+        "desconto": 0,
+        "pontos_ganhos_unit": 3
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "DEBITO",
+        "valor": 60,
+        "data": "2026-03-15T14:25:00Z"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "data_venda": "2026-04-10T16:00:00Z",
+    "valor_total": 500,
+    "pontos_ganhos_total": 50,
+    "id_cliente": 6,
+    "id_funcionario": 17,
+    "itens": [
+      {
+        "id_produto": 106,
+        "nome_produto": "LEITE",
+        "quantidade": 20,
+        "preco_unitario": 6.9,
+        "desconto": 5,
+        "pontos_ganhos_unit": 20
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "CREDITO",
+        "valor": 300,
+        "data": "2026-04-10T16:05:00Z"
+      },
+      {
+        "tipo": "PIX",
+        "valor": 200,
+        "data": "2026-04-10T16:06:00Z"
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "data_venda": "2026-06-25T12:10:00Z",
+    "valor_total": 220,
+    "pontos_ganhos_total": 22,
+    "id_cliente": 7,
+    "id_funcionario": 18,
+    "itens": [
+      {
+        "id_produto": 107,
+        "nome_produto": "ÓLEO",
+        "quantidade": 8,
+        "preco_unitario": 8.9,
+        "desconto": 0,
+        "pontos_ganhos_unit": 8
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "DINHEIRO",
+        "valor": 220,
+        "data": "2026-06-25T12:15:00Z"
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "data_venda": "2026-07-18T13:40:00Z",
+    "valor_total": 40,
+    "pontos_ganhos_total": 2,
+    "id_cliente": 8,
+    "id_funcionario": 19,
+    "itens": [
+      {
+        "id_produto": 108,
+        "nome_produto": "MARGARINA",
+        "quantidade": 4,
+        "preco_unitario": 5.8,
+        "desconto": 0,
+        "pontos_ganhos_unit": 1
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "DINHEIRO",
+        "valor": 40,
+        "data": "2026-07-18T13:45:00Z"
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "data_venda": "2026-09-05T17:25:00Z",
+    "valor_total": 90,
+    "pontos_ganhos_total": 6,
+    "id_cliente": 9,
+    "id_funcionario": 20,
+    "itens": [
+      {
+        "id_produto": 109,
+        "nome_produto": "BISCOITO",
+        "quantidade": 6,
+        "preco_unitario": 3.9,
+        "desconto": 0,
+        "pontos_ganhos_unit": 2
+      }
+    ],
+    "pagamentos": [
+      {
+        "tipo": "DINHEIRO",
+        "valor": 90,
+        "data": "2026-09-05T17:30:00Z"
+      }
+    ]
+  }
+]
