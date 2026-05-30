@@ -3,6 +3,8 @@ import produtosRoutes from "./routes/routes_produtos.js";
 import rotasVenda from "./routes/routes_venda.js";
 import rotaPessoa from "./routes/routes_pessoa.js";
 import rotaCampanha from "./routes/campanha.js";
+import rotaEntrada from "./routes/routes_entrada.js";
+
 import cors from "cors";
 import connectToDatabase from "./config/dbConnect.js";
 import mongoose from "mongoose";
@@ -17,6 +19,8 @@ try {
   app.use("/vendas", rotasVenda);
   app.use("/pessoa", rotaPessoa);
   app.use("/campanha", rotaCampanha);
+  app.use("/entrada", rotaEntrada);
+
   mongoose.connection.on("error", (error) => {
     console.error("Erro na conexão com o banco de dados:", error);
   });
